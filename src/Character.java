@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 // Invetory Sistemi Eksik
 // İtem giyme çıkarma eksik
-// Canavardan item düşme olayı
+// Canavardan item düşme olayı gg
 
 
 public class Character {
