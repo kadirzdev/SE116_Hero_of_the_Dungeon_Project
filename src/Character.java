@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.util.spi.AbstractResourceBundleProvider;
 
-// Invetory Sistemi Eksik
+// Invetory Sistemi Eksik11
 // İtem giyme çıkarma eksik
 // Canavardan item düşme olayı gg
 
@@ -11,20 +12,84 @@ public class Character {
     private int     ID;
     private String  name;
     private int     hitPoints;
-    private int     weapon;
-    private int     clothing;
+    private Weapons weapon;
+    private Armors  clothing;
     private boolean lifeStatus;
+    private int     currentSet;
+    private int     currentRoom;
 
-    // Character Location
-    protected int location;
+    public int getID() {
+        return ID;
+    }
 
-    public Character(int ID, String name, int hitPoints, int weapon, int clothing, int location) {
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getHitPoints() {
+        return hitPoints;
+    }
+
+    public void setHitPoints(int hitPoints) {
+        this.hitPoints = hitPoints;
+    }
+
+    public Weapons getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(Weapons weapon) {
+        this.weapon = weapon;
+    }
+
+    public Armors getClothing() {
+        return clothing;
+    }
+
+    public void setClothing(Armors clothing) {
+        this.clothing = clothing;
+    }
+
+    public boolean isLifeStatus() {
+        return lifeStatus;
+    }
+
+    public void setLifeStatus(boolean lifeStatus) {
+        this.lifeStatus = lifeStatus;
+    }
+
+    public int getCurrentSet() {
+        return currentSet;
+    }
+
+    public void setCurrentSet(int currentSet) {
+        this.currentSet = currentSet;
+    }
+
+    public int getCurrentRoom() {
+        return currentRoom;
+    }
+
+    public void setCurrentRoom(int currentRoom) {
+        this.currentRoom = currentRoom;
+    }
+
+    public Character(int ID, String name, int hitPoints, Weapons weapon, Armors clothing, int currentSet, int currentRoom) {
         this.ID = ID;
         this.name = name;
         this.hitPoints = hitPoints;
         this.weapon = weapon;
         this.clothing = clothing;
-        this.location = location;
+        this.currentRoom = currentRoom;
+        this.currentSet = currentSet;
         this.lifeStatus = lifeCheck();
 
     }
@@ -43,15 +108,15 @@ public class Character {
 
 class Hero extends Character {
 
-    public Hero(int ID, String name, int hitPoints, int weapon, int clothing, int location) {
+    public Hero(int ID, String name, int hitPoints, Weapons weapon, Armors clothing, int currentSet, int currentRoom) {
 
-        super(ID, name, hitPoints, weapon, clothing, location);
+        super(ID, name, hitPoints, weapon, clothing, currentSet, currentRoom);
 
     }
 
     public void move(int x) {
-        this.location = x;
-    };
+
+    }
 
 }
 
@@ -59,9 +124,9 @@ class Monster extends Character {
 
     private int loot;
 
-    public Monster(int ID, String name, int hitPoints, int weapon, int clothing, int location, int loot) {
+    public Monster(int ID, String name, int hitPoints, Weapons weapon, Armors clothing, int currentSet, int currentRoom, int loot) {
 
-        super(ID, name, hitPoints, weapon, clothing, location);
+        super(ID, name, hitPoints, weapon, clothing, currentSet, currentRoom);
 
         this.loot = loot;
 
@@ -72,9 +137,9 @@ class Monster extends Character {
 
 class Townspeople extends Character {
 
-    public Townspeople(int ID, String name, int hitPoints, int weapon, int clothing, int location) {
+    public Townspeople(int ID, String name, int hitPoints, Weapons weapon, Armors clothing, int currentSet, int currentRoom) {
 
-        super(ID, name, hitPoints, weapon, clothing, location);
+        super(ID, name, hitPoints, weapon, clothing, currentSet, currentRoom);
 
     }
 
