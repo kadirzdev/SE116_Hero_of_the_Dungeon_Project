@@ -4,6 +4,9 @@ import java.util.spi.AbstractResourceBundleProvider;
 // Invetory Sistemi Eksik11
 // İtem giyme çıkarma eksik
 // Canavardan item düşme olayı gg
+//Oda arası geçişler eksik
+//Oda içine item, köylü ve canavar ekleme eksik
+
 
 
 public class Character {
@@ -130,6 +133,14 @@ class Monster extends Character {
 
         this.loot = loot;
 
+    }
+
+    public ArrayList<Monster> generateMonster(ArrayList<Weapons> allWeaponsList){
+
+        ArrayList<Monster> monsterArrayList = new ArrayList<>();
+        ArrayList<OneHanded> oneHandedArrayList = OneHanded.generateOneHandedSwords();
+        
+        monsterArrayList.add(new Monster(1,"Goblin",10,oneHandedArrayList.get(0),)
     }
 
 
