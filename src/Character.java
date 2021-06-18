@@ -124,6 +124,8 @@ public class Character {
 
 class Hero extends Character {
     int savedTownspeople;
+    int previousRoom;
+    int previousSet;
 
     public Hero(int ID, String name, int hitPoints, Weapons weapon, Armors clothing, int currentSet, int currentRoom, int currentLevel) {
 

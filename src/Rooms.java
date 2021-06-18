@@ -4,8 +4,8 @@ public class Rooms {
     public boolean hasaSideDoor;
     Monster monster;
     int howManyDoors;
-    boolean hasaLadder;
-    int howManytownsPeople = (int)Math.random()*40;
+    boolean hasLadder;
+    int howManytownsPeople = (int)(Math.random()*40);
 
 
     private int randomRoom;
@@ -38,22 +38,28 @@ public class Rooms {
 
 
         System.out.println("The hero sees the following:");
-        if (hasaLadder = true){
-            System.out.println("a ladder that goes upwards,");
+        if (hasLadder = false){
+            System.out.println("a ladder that goes upwards");
         }if (howManyDoors == 1) {
-            System.out.println("a door (door1) ,");
+            System.out.println("a door (door1) ");
         }else if (howManyDoors == 2){
+            System.out.println("a door (door1) ");
             if (random == 0){
-                System.out.println("another door to the left (door2),");
+                System.out.println("another door to the left (door2)");
             }else if (random == 1){
-                System.out.println("another door to the right (door2) ,");
+                System.out.println("another door to the right (door2) ");
+            }else {
+                System.out.println("There's no doors here.");
             }
 
         }
         if (howManytownsPeople != 0){
-            System.out.println(howManytownsPeople + "townspeople,");
+            System.out.println(howManytownsPeople + " townspeople");
+        }if (monster.isDead()){
+            System.out.println("Remains of a " + monster.getName());
+        }else {
+            System.out.println("a " + monster.getName());
         }
-        System.out.println("a " + monster.getName() + ".");
         System.out.println("-----------------------");
         if (howManyDoors == 1) {
             System.out.println("Enter the door (enterdoor1)");
@@ -64,10 +70,12 @@ public class Rooms {
         System.out.println("Attack monster (attackmonster1)");
         System.out.println("Check life status (hp)");
         System.out.println("Check monster's life status (monsterhp)");
-        if (hasaLadder){
+        if (hasLadder){
             System.out.println("Climb ladder (ladder)");
-        }
+        }else {}
+        System.out.println("Go back (goback)");
     }
+
 
 
 }

@@ -85,11 +85,28 @@ public class Main {
                     }
 
                     break;
+
+                case "goback":
+                   goBack(hero,rooms);
+                    rooms[hero.getCurrentSet()][hero.getCurrentRoom()].perceive(hero);
+
             }
         }
 
 
 
+    }
+
+    private static void goBack(Hero hero, Rooms[][] rooms) {
+
+        if (hero.getCurrentLevel() == 0 && hero.getCurrentSet() == 0) {
+            System.out.println("There's no door in the back.");
+        } else {
+            hero.setCurrentSet(hero.previousSet);
+            hero.setCurrentRoom(hero.previousRoom);
+            System.out.println("Hero is now " + hero.previousSet + ". set and " + hero.previousRoom + ". room");
+
+        }
     }
 
     public static Rooms[][] generateRooms(){
@@ -106,7 +123,7 @@ public class Main {
                 randomset = (int) (Math.random() * 5);
                 randomroom = (int) (Math.random() * 5);
             } else {
-
+                System.out.println("There are " + randomset + " sets and " + randomroom + " rooms in this level.");
                 looper = false;
             }
         }
@@ -117,7 +134,7 @@ public class Main {
                     randomroomforladder = (int)(Math.random() * 4 - 1);
 
                 }else {
-
+                    System.out.println("The ladder is in " + randomsetforladder + ". set and " + randomroomforladder + ". room.");
                     looperforladder = false;
                 }
         }
@@ -129,13 +146,22 @@ public class Main {
                 rooms[i][j].generateMonsterInTheRoom();
             }
         }
-        rooms[randomsetforladder-1][randomroomforladder-1].hasaLadder = true;
+        for (int i = 0; i < rooms.length; i++){
+            for (int j = 0; j < rooms[i].length; j++){
+                rooms[i][j].hasLadder = false;
+                rooms[i][j].howManyDoors = 1;
+            }
+        }
+        rooms[randomsetforladder-1][randomroomforladder-1].hasLadder = true;
         rooms[randomsetforladder-1][randomroomforladder-1].howManyDoors = 2;
         rooms[randomset-1][randomroom-1].howManyDoors = 0;
         return rooms;
     }
 
     public static void enterNextRoom(Hero hero, Rooms[][] rooms){
+        hero.previousRoom = hero.getCurrentRoom();
+        hero.previousSet = hero.getCurrentSet();
+
         if (hero.getCurrentRoom() == rooms[hero.getCurrentSet()].length-1){
             hero.setCurrentSet(hero.getCurrentSet()+1);
             hero.setCurrentRoom(0);
