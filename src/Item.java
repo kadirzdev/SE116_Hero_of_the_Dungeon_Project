@@ -19,9 +19,6 @@ public class Item {
             armorsArrayList.add(new Armors("Leather Armor", 10));
             armorsArrayList.add(new Armors("Chain Armor", 25));
             armorsArrayList.add(new Armors("Full Plate Armor", 40));
-
-            System.out.println("Armors have created, there are" + armorsArrayList.size() + " armors in the game.");
-
             return armorsArrayList;
 
 
@@ -55,9 +52,7 @@ public class Item {
             this.damage = damage;
         }
 
-        void attack(Weapons weapon) {
-            System.out.println("You have dealt" + weapon.damage + " damage.");
-        }
+
 
 
     }
@@ -87,10 +82,7 @@ public class Item {
             return "";
         }
 
-        @Override
-        public void attack(Weapons weapon) {
-            super.attack(weapon);
-        }
+
     }
 
     class OneHanded extends Swords {
@@ -103,8 +95,6 @@ public class Item {
 
             ArrayList<OneHanded> oneHandedArrayList = new ArrayList<>();
             oneHandedArrayList.add(new OneHanded("Short sword", 2, 6));
-
-            System.out.println("One handed weapons have created, there are " + oneHandedArrayList.size() + " one handed weapons in the game.");
             return oneHandedArrayList;
         }
 
@@ -126,8 +116,6 @@ public class Item {
 
             ArrayList<TwoHanded> twoHandedArrayList = new ArrayList<>();
             twoHandedArrayList.add(new TwoHanded("Longsword",5,10));
-
-            System.out.println("Two handed weapons have created, there are " + twoHandedArrayList.size() + " two handed weapons in the game." );
             return twoHandedArrayList;
         }
     }
@@ -146,9 +134,7 @@ public class Item {
             bowsArrayList.add(new Bows("Longbow", 35, 8));
             bowsArrayList.add(new OneHandedCrossbow("Hand Crossbow", 35, 8));
             bowsArrayList.add(new Bows("Heavy Crossbow", 60, 10));
-
-            System.out.println("Bows have created, there are " + bowsArrayList.size() + " bows in the game.");
-            return bowsArrayList;
+             return bowsArrayList;
         }
 
         @Override
@@ -188,7 +174,6 @@ public class Item {
             shieldsArrayList.add(new Shields("Heavy Steel Shield", 30, 10));
             shieldsArrayList.add(new Shields("Tower Shield", 75, 25));
 
-            System.out.println("Shields are created, there are " + shieldsArrayList.size() + " shield in the game.");
             return shieldsArrayList;
         }
 
