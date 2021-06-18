@@ -6,6 +6,8 @@ public class Rooms {
     int howManyDoors;
     boolean hasLadder;
     int howManytownsPeople = (int)(Math.random()*40);
+    ArrayList<Weapons> weaponsloot;
+
 
 
     private int randomRoom;
@@ -51,6 +53,9 @@ public class Rooms {
             }else {
                 System.out.println("There's no doors here.");
             }
+            if (weaponsloot != null){
+                System.out.println("Some items on the ground");
+            }
 
         }
         if (howManytownsPeople != 0){
@@ -67,6 +72,9 @@ public class Rooms {
             System.out.println("Enter the door (enterdoor1)");
             System.out.println("Second door (enterdoor2)");
         }
+        if (weaponsloot != null){
+            System.out.println("Take the items in the ground (take)");
+        }
         System.out.println("Attack monster (attackmonster1)");
         System.out.println("Check life status (hp)");
         System.out.println("Check monster's life status (monsterhp)");
@@ -74,6 +82,7 @@ public class Rooms {
             System.out.println("Climb ladder (ladder)");
         }else {}
         System.out.println("Go back (goback)");
+        System.out.println("Open your inventory (inventory)");
     }
 
 

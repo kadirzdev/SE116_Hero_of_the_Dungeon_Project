@@ -21,6 +21,15 @@ public class Character {
     private int     currentSet;
     private int     currentRoom;
     private int     currentLevel;
+    private Items   shield;
+
+    public Items getShield() {
+        return shield;
+    }
+
+    public void setShield(Items shield) {
+        this.shield = shield;
+    }
 
     public int getCurrentLevel() {
         return currentLevel;
@@ -126,14 +135,13 @@ class Hero extends Character {
     int savedTownspeople;
     int previousRoom;
     int previousSet;
+    ArrayList<Weapons> weaponsArrayList;
+    ArrayList<Armors> armorsArrayList;
+    int carryweight = 0;
 
     public Hero(int ID, String name, int hitPoints, Weapons weapon, Armors clothing, int currentSet, int currentRoom, int currentLevel) {
 
         super(ID, name, hitPoints, weapon, clothing, currentSet, currentRoom, currentLevel);
-
-    }
-
-    public void move(int x) {
 
     }
 
@@ -181,6 +189,39 @@ class Hero extends Character {
     private void youWin() {
         System.out.println("Congratulations!!!!!!!");
         System.out.println("Townspeople saved: " + savedTownspeople);
+    }
+
+    public void generateInventory(){
+        weaponsArrayList.add(getWeapon());
+        carryweight++;
+        armorsArrayList.add(getClothing());
+        carryweight++;
+    }
+    public void inventory() {
+
+
+        System.out.println("Firstly, type the item list name. Then, write its list number.");
+        System.out.println("Example:");
+        System.out.println("Weapons");
+        System.out.println("1");
+        System.out.println();
+        System.out.println("Weapons: ");
+            for (Weapons i : weaponsArrayList){
+                int j = 0;
+                System.out.println((j+1) + ") " + i.name);
+            }
+        System.out.println("Armors:");
+            for (Armors i : armorsArrayList){
+                int j = 0;
+                System.out.println((j+1) + ") " + i.name);
+            }
+
+        }
+
+    public void weaponschoices() {
+        System.out.println("choose a number.");
+        System.out.println("1) Equip / Unequip");
+        System.out.println("2) Drop");
     }
 }
 

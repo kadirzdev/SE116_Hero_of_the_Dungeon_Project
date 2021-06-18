@@ -1,3 +1,4 @@
+import java.lang.invoke.SwitchPoint;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -7,11 +8,13 @@ public class Main {
         Scanner input = new Scanner(System.in);
 
         ArrayList<OneHanded> oneHandedArrayList = OneHanded.generateOneHandedSwords();
-        ArrayList<TwoHanded> twoHandedArrayList = TwoHanded.generateTwoHandedSwords();
         ArrayList<Shields> shieldsArrayLists = Shields.generateShields();
         ArrayList<Bows> bowsArrayList = Bows.generateBows();
         ArrayList<Armors> armorsArrayList = Armors.generateArmors();
         Rooms[][] rooms = generateRooms();
+
+        ArrayList<Weapons> weop = new ArrayList<>();
+
 
 
 
@@ -89,6 +92,50 @@ public class Main {
                 case "goback":
                    goBack(hero,rooms);
                     rooms[hero.getCurrentSet()][hero.getCurrentRoom()].perceive(hero);
+                    break;
+
+                case "take":
+                    boolean overencumber = true;
+                    while(overencumber){
+                        for (Weapons i : rooms[hero.getCurrentSet()][hero.getCurrentRoom()].weaponsloot)
+                        hero.weaponsArrayList.add(rooms[hero.getCurrentSet()][hero.getCurrentRoom()].weaponsloot.);
+                    }
+
+                case "inventory":
+                    hero.inventory();
+                    boolean innerlooper = true;
+                    while (innerlooper){
+                        String weaponcataloguechoice = input.nextLine();
+                        switch (weaponcataloguechoice){
+
+                            case "weapon":
+                                System.out.println("Weapons catalogue chosen.");
+                                int secondcataloguechoice = input.nextInt();
+                                System.out.println(hero.weaponsArrayList.get(secondcataloguechoice).name + " is chosen.");
+                                hero.weaponschoices();
+                                int thirdcataloguechoice = input.nextInt();
+                                switch (thirdcataloguechoice){
+                                    case 1:
+                                        if (hero.getWeapon() != null){
+                                            System.out.println("You unequipped" + hero.getWeapon() + " and equipped " + hero.weaponsArrayList.get(secondcataloguechoice).name + ".");
+                                            hero.setWeapon(hero.weaponsArrayList.get(secondcataloguechoice));
+                                        }else if (hero.getWeapon() == hero.weaponsArrayList.get(secondcataloguechoice)){
+                                            System.out.println("You unequipped" + hero.weaponsArrayList.get(secondcataloguechoice).name + ".");
+                                            hero.setWeapon(new OneHanded("Fists",1,1));
+                                        }else{
+                                            System.out.println("You unequipped" + hero.weaponsArrayList.get(secondcataloguechoice).name + ".");
+                                        }
+
+                                    case 2:
+                                        System.out.println("You dropped the weapon.");
+                                        rooms[hero.getCurrentSet()][hero.getCurrentRoom()].weaponsloot.add(hero.weaponsArrayList.remove(secondcataloguechoice));
+                                        hero.weaponsArrayList.remove(secondcataloguechoice);
+
+
+                                }
+                        }
+                    }
+
 
             }
         }

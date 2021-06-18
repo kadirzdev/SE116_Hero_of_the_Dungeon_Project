@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
-public class Item {
-}
+
 
     interface Items {
         void equip();
@@ -104,20 +103,6 @@ public class Item {
         }
 
 
-    }
-
-    class TwoHanded extends Swords {
-
-        public TwoHanded(String name, int range, int damage) {
-            super(name, range, damage);
-        }
-
-        public static ArrayList<TwoHanded> generateTwoHandedSwords() {
-
-            ArrayList<TwoHanded> twoHandedArrayList = new ArrayList<>();
-            twoHandedArrayList.add(new TwoHanded("Longsword",5,10));
-            return twoHandedArrayList;
-        }
     }
 
 
