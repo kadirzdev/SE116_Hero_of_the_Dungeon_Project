@@ -97,8 +97,15 @@ public class Main {
                 case "take":
                     boolean overencumber = true;
                     while(overencumber){
-                        for (Weapons i : rooms[hero.getCurrentSet()][hero.getCurrentRoom()].weaponsloot)
-                        hero.weaponsArrayList.add(rooms[hero.getCurrentSet()][hero.getCurrentRoom()].weaponsloot.);
+                        for (int i = 0; i < rooms[hero.getCurrentSet()][hero.getCurrentRoom()].weaponsloot.size(); i++) {
+                           if (hero.carryweight < 20) {
+                                   hero.weaponsArrayList.add(rooms[hero.getCurrentSet()][hero.getCurrentRoom()].weaponsloot.get(i));
+                                   hero.carryweight++;
+                                   overencumber = false;
+                           }else {
+                               System.out.println("You don't have space in your inventory. You need to drop some items.");
+                           }
+                        }
                     }
 
                 case "inventory":
@@ -119,29 +126,98 @@ public class Main {
                                         if (hero.getWeapon() != null){
                                             System.out.println("You unequipped" + hero.getWeapon() + " and equipped " + hero.weaponsArrayList.get(secondcataloguechoice).name + ".");
                                             hero.setWeapon(hero.weaponsArrayList.get(secondcataloguechoice));
+                                            innerlooper = false;
                                         }else if (hero.getWeapon() == hero.weaponsArrayList.get(secondcataloguechoice)){
                                             System.out.println("You unequipped" + hero.weaponsArrayList.get(secondcataloguechoice).name + ".");
                                             hero.setWeapon(new OneHanded("Fists",1,1));
+                                            innerlooper = false;
                                         }else{
                                             System.out.println("You unequipped" + hero.weaponsArrayList.get(secondcataloguechoice).name + ".");
+                                            innerlooper = false;
                                         }
 
                                     case 2:
                                         System.out.println("You dropped the weapon.");
                                         rooms[hero.getCurrentSet()][hero.getCurrentRoom()].weaponsloot.add(hero.weaponsArrayList.remove(secondcataloguechoice));
                                         hero.weaponsArrayList.remove(secondcataloguechoice);
-
-
+                                        innerlooper = false;
+                                        break;
                                 }
+                                break;
                         }
                     }
+                case "loot":
+                    System.out.println("In the remains, you found" +rooms[hero.getCurrentSet()][hero.getCurrentRoom()].monster.getWeapon().name +", and" + rooms[hero.getCurrentSet()][hero.getCurrentRoom()].monster.getClothing().name + "." );
+                    int whattypeofloot = (int)(Math.random() * 3);
+                    ArrayList reward = rewardGenerator();
 
+                    hero.lootMenu(rooms);
+                    String lootchosin = input.next();
+                    switch (lootchosin){
+                        case "loot1":
+                            if (hero.carryweight < 20) {
+                                System.out.println(rooms[hero.getCurrentSet()][hero.getCurrentRoom()].monster.getWeapon().name + " is now in your inventory.");
+                                hero.weaponsArrayList.add(rooms[hero.getCurrentSet()][hero.getCurrentRoom()].monster.getWeapon());
+                                hero.carryweight++;
+                            }else {
+                                System.out.println("You don't have space in your inventory. You need to drop some items.");
+                            }
+
+
+                            break;
+                        case "loot2":
+                            System.out.println(rooms[hero.getCurrentSet()][hero.getCurrentRoom()].monster.getClothing().name + " is now in your inventory.");
+                            hero.armorsArrayList.add(rooms[hero.getCurrentSet()][hero.getCurrentRoom()].monster.getClothing());
+                            break;
+                        case "takerewards":
+
+                    }
 
             }
         }
 
 
 
+    }
+
+    private static ArrayList rewardGenerator() {
+        ArrayList<OneHanded> oneHandedArrayList = OneHanded.generateOneHandedSwords();
+        ArrayList<Shields> shieldsArrayLists = Shields.generateShields();
+        ArrayList<Bows> bowsArrayList = Bows.generateBows();
+        ArrayList<Armors> armorsArrayList = Armors.generateArmors();
+
+        ArrayList empty = new ArrayList();
+
+        System.out.println("As a reward, you also found: ");
+
+        int howmanyloots = (int)(Math.random() * 2);
+        int whattypeofloot = (int)(Math.random() * 3);
+        int whichloot = (int)(Math.random() * 9);
+        for (int i = 0; i >= howmanyloots; i++){
+            if (whattypeofloot == 0){
+                System.out.println(oneHandedArrayList.get(whichloot).name);
+                ArrayList reward = new ArrayList();
+                reward.add(oneHandedArrayList.get(whichloot));
+                return reward;
+            }else if(whattypeofloot == 1){
+                System.out.println(shieldsArrayLists.get(whichloot).name);
+                ArrayList reward = new ArrayList();
+                reward.add(shieldsArrayLists.get(whichloot));
+                return reward;
+            }else if(whattypeofloot == 2){
+                System.out.println(bowsArrayList.get(whichloot).name);
+                ArrayList reward = new ArrayList();
+                reward.add(bowsArrayList.get(whichloot));
+                return reward;
+            }else if (whattypeofloot == 3){
+                System.out.println(armorsArrayList.get(whichloot).name);
+                ArrayList reward = new ArrayList();
+                reward.add(armorsArrayList.get(whichloot));
+                return reward;
+            }
+
+        }
+        return empty;
     }
 
     private static void goBack(Hero hero, Rooms[][] rooms) {

@@ -1,3 +1,4 @@
+import javax.swing.text.MutableAttributeSet;
 import java.util.ArrayList;
 import java.util.spi.AbstractResourceBundleProvider;
 
@@ -21,13 +22,13 @@ public class Character {
     private int     currentSet;
     private int     currentRoom;
     private int     currentLevel;
-    private Items   shield;
+    private Shields   shield;
 
-    public Items getShield() {
+    public Shields getShield() {
         return shield;
     }
 
-    public void setShield(Items shield) {
+    public void setShield(Shields shield) {
         this.shield = shield;
     }
 
@@ -137,7 +138,7 @@ class Hero extends Character {
     int previousSet;
     ArrayList<Weapons> weaponsArrayList;
     ArrayList<Armors> armorsArrayList;
-    int carryweight = 0;
+    int carryweight;
 
     public Hero(int ID, String name, int hitPoints, Weapons weapon, Armors clothing, int currentSet, int currentRoom, int currentLevel) {
 
@@ -150,6 +151,13 @@ class Hero extends Character {
         int heroDamage = (int)(Math.random() * getWeapon().damage);
         int monsterDamage = (int)(Math.random() * monster.getWeapon().damage);
         System.out.println("You have dealt " + heroDamage + " damage." + " The monster fights back and deals " + monsterDamage + " damage.");
+        if (hero.getShield() != null){
+            int chance = (int)(Math.random() * (hero.getShield().getBlockChance()));
+            if (chance > hero.getShield().getBlockChance()  || chance <= 100){
+                System.out.println("you blocked the damage!");
+                monsterDamage = 0;
+            }
+        }
         monster.setCurrentHitPoints(monster.getCurrentHitPoints()-heroDamage);
         hero.setHitPoints(hero.getHitPoints()-monsterDamage);
 
@@ -222,6 +230,12 @@ class Hero extends Character {
         System.out.println("choose a number.");
         System.out.println("1) Equip / Unequip");
         System.out.println("2) Drop");
+    }
+
+    public void lootMenu(Rooms[][] rooms) {
+        System.out.println("Take " + rooms[getCurrentSet()][getCurrentRoom()].monster.getWeapon().name + " (take1)");
+        System.out.println("Take " + rooms[getCurrentSet()][getCurrentRoom()].monster.getClothing().name + " (take2)");
+        System.out.println("Take rewards (takerewards)");
     }
 }
 

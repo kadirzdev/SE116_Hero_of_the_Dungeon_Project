@@ -7,7 +7,9 @@ public class Rooms {
     boolean hasLadder;
     int howManytownsPeople = (int)(Math.random()*40);
     ArrayList<Weapons> weaponsloot;
-
+    ArrayList<Shields> shieldsloot;
+    ArrayList<Armors> armorsloot;
+    ArrayList<Items> itemsloot;
 
 
     private int randomRoom;
@@ -61,7 +63,7 @@ public class Rooms {
         if (howManytownsPeople != 0){
             System.out.println(howManytownsPeople + " townspeople");
         }if (monster.isDead()){
-            System.out.println("Remains of a " + monster.getName());
+            System.out.println("Remains of a " + monster.getName() );
         }else {
             System.out.println("a " + monster.getName());
         }
@@ -81,6 +83,9 @@ public class Rooms {
         if (hasLadder){
             System.out.println("Climb ladder (ladder)");
         }else {}
+        if (monster.isDead()){
+            System.out.println("Loot" + monster.getName() + " (loot)");
+        }
         System.out.println("Go back (goback)");
         System.out.println("Open your inventory (inventory)");
     }
