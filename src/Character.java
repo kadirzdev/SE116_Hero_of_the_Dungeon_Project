@@ -197,6 +197,14 @@ class Hero extends Character {
     private void youWin() {
         System.out.println("Congratulations!!!!!!!");
         System.out.println("Townspeople saved: " + savedTownspeople);
+        if (savedTownspeople == 0){
+            System.out.println("...");
+            System.out.println("I mean...");
+            System.out.println("Really...");
+            System.out.println("You really thought you can win the game without saving anyone?");
+            System.err.println("No.");
+            System.err.println("You LOSE!");
+        }
     }
 
     public void generateInventory(){
