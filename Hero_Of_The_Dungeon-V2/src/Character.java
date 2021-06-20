@@ -1,6 +1,12 @@
 import java.util.ArrayList;
 
-public class Character {
+interface HeroUI {
+    int fight(Monster attackedMonster);
+    void equip(Item willEquip, int willEquippedIndex);
+    void listInventory();
+}
+
+abstract public class Character {
 
     private int      ID;
     private String   name;
@@ -101,29 +107,7 @@ public class Character {
         this.currentLevel = currentLevel;
     }
 
-    public void equip(Item willEquip, int willEquippedIndex) {
-        if (willEquip instanceof Weapon) {
-
-            Weapon tempWeapon;
-            tempWeapon = this.weapon;
-            this.setWeapon((Weapon) willEquip);
-            this.inventory.remove(willEquippedIndex);
-            this.inventory.add(willEquippedIndex, tempWeapon);
-
-        } else if (willEquip instanceof Clothing) {
-
-            Clothing tempClothing;
-            tempClothing = this.clothing;
-
-            this.setClothing((Clothing) willEquip);
-
-            this.inventory.remove(willEquippedIndex);
-            this.inventory.add(willEquippedIndex, tempClothing);
-
-            this.setClothing((Clothing) willEquip);
-            this.setHitPoints(this.getHitPoints() + ((Clothing) willEquip).getBonusHP() - tempClothing.getBonusHP());
-        }
-    }
+    public void equip() {}
 }
 
 class Monster extends Character {
@@ -138,7 +122,7 @@ class Townsperson extends Character {
     }
 }
 
-class Hero extends Character {
+class Hero extends Character implements HeroUI {
     private int numOfPeopleSaved = 0;
     private ArrayList<Monster> nearMonsters = new ArrayList<Monster>();
     private ArrayList<Townsperson> nearTownspeople = new ArrayList<Townsperson>();
@@ -211,6 +195,30 @@ class Hero extends Character {
 
         return 0;
 
+    }
+
+    public void equip(Item willEquip, int willEquippedIndex) {
+        if (willEquip instanceof Weapon) {
+
+            Weapon tempWeapon;
+            tempWeapon = this.getWeapon();
+            this.setWeapon((Weapon) willEquip);
+            this.getInventory().remove(willEquippedIndex);
+            this.getInventory().add(willEquippedIndex, tempWeapon);
+
+        } else if (willEquip instanceof Clothing) {
+
+            Clothing tempClothing;
+            tempClothing = this.getClothing();
+
+            this.setClothing((Clothing) willEquip);
+
+            this.getInventory().remove(willEquippedIndex);
+            this.getInventory().add(willEquippedIndex, tempClothing);
+
+            this.setClothing((Clothing) willEquip);
+            this.setHitPoints(this.getHitPoints() + ((Clothing) willEquip).getBonusHP() - tempClothing.getBonusHP());
+        }
     }
 
     public void listInventory() {

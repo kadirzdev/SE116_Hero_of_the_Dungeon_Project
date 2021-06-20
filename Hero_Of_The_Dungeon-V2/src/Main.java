@@ -1,9 +1,13 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        final String fileName = "GameReport.txt";
+
         //Random rand = new Random();
         Scanner scanner = new Scanner(System.in);
 
@@ -63,12 +67,7 @@ public class Main {
             newHero = new HokiDoki(heroIndex, heroName, 80, shortbow, starter_clothing, true, 1, 1, default_inventory);
         }
 
-
         System.out.printf("Your character is successfully created!%n%n");
-
-
-
-
 
         boolean IN_ROOM = true;
 
@@ -88,6 +87,8 @@ public class Main {
                 currentRoom.printRoomInfo();
                 System.out.println("List Inventory (in)");
                 System.out.println("Loot Items (lt)");
+                System.out.println("Pick All Lootable Items (pa)");
+                System.out.println("Exit (ex)");
 
                 System.out.printf("Your ACTION: ");
 
@@ -110,8 +111,17 @@ public class Main {
                     newHero.setCurrentLevel(newHero.getCurrentLevel() - 1);
                     newHero.moveHero(toMove);
                 } else if (commandLetter == 'a') {
-                    String attackedMonsterIndexSTR = inputMove.substring(1);
-                    int attackedMonsterIndex = Integer.parseInt(attackedMonsterIndexSTR);
+
+                    String attackedMonsterIndexSTR;
+                    int attackedMonsterIndex = 0;
+
+                    try {
+                        attackedMonsterIndexSTR = inputMove.substring(1);
+                        attackedMonsterIndex = Integer.parseInt(attackedMonsterIndexSTR);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Enter valid input.");
+                        continue;
+                    }
 
                     try {
                         Monster attackedMonster = currentRoom.getMonsters().get(attackedMonsterIndex - 1);
@@ -170,23 +180,32 @@ public class Main {
                     newHero.getInventory().addAll(currentRoom.getItemLoot());
                     currentRoom.getItemLoot().clear();
 
+                } else if (inputMove.equals("ex")) {
+                    IN_ROOM = false;
+                    System.out.println("GAME OVER!");
+                    break;
                 } else {
                     System.out.println("Please check your ACTION!");
                     toMove = currentRoom.getID();
                 }
 
-            } while(!inputMove.equals("d1") && !inputMove.equals("d2") && !inputMove.equals("up") && !inputMove.equals("down") && resultOfFight != -1);
-
-
+            } while(IN_ROOM == false || resultOfFight != -1);
 
         }
 
+        try {
+            FileWriter gameReport = new FileWriter(fileName);
+            gameReport.write("Thank you for playing the game. We created short summary of your actions: " + "\n");
+            gameReport.write("Player Name: " + newHero.getName() + "\n");
+            gameReport.write("Hero Name: " + heroes[heroIndex - 1] + "\n");
+            gameReport.write("Level: " + newHero.getCurrentLevel() + "\n");
+            gameReport.write("Total Rescued Townspeople: " + newHero.getNumOfPeopleSaved() + "\n");
+            gameReport.write("Game Creators: Suphi Kadir Ozarpaci - Direnc Can Karahan - Lutfi Sevim");
+            gameReport.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong while creating game report...");
+            e.printStackTrace();
+        }
 
-
-
-
-
-
-        //Hero kadir = new Hero(1, "Kadir", 100, longbow, armour, true, 1, 1, inventory);
     }
 }
