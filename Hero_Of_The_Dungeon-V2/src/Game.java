@@ -65,8 +65,6 @@ public class Game {
 
     }
 
-
-
     public void generateLevelSystem() {
         Random rand = new Random();
 

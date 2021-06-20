@@ -58,7 +58,6 @@ class Clothing extends Item {
 
 }
 
-
 abstract class Weapon extends Item {
 
     private int damage;
@@ -81,7 +80,6 @@ abstract class Weapon extends Item {
 }
 
 class Punch extends Weapon {
-
     public Punch(String name, int weight, int value, int damage, int range) {
         super(name, weight, value, damage, range);
     }

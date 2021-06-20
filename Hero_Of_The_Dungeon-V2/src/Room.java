@@ -17,7 +17,7 @@ public class Room {
     private Room stairs = null;
     private Room downstairs = null;
 
-    private ArrayList<Item> itemLoot = new ArrayList<Item>();
+    private ArrayList<Item> itemLoot;
 
     public Room(int ID, int level, ArrayList<Monster> monsters, ArrayList<Townsperson> townspeople, Room door1, Room door2, Room stairs, Room downstairs) {
         this.ID = ID;
@@ -30,6 +30,7 @@ public class Room {
         this.downstairs = downstairs;
         this.monsters = new ArrayList<Monster>();
         this.townspeople = new ArrayList<Townsperson>();
+        this.itemLoot = new ArrayList<Item>();
     }
 
     public int getID() {
@@ -131,6 +132,8 @@ public class Room {
         // Monster Items
         ArrayList<Item> monsterInventory = new ArrayList<Item>();
 
+        ArrayList<Item> itemLottery = new ArrayList<Item>();
+
         Sword monsterLoot1 = new Sword("Glory Sword", 5, 10, 10, 10);
         Sword monsterLoot2 = new Sword("Big Sword", 7, 15, 15, 10);
         Sword monsterLoot3 = new Sword("Sun Sword", 10, 20, 20, 10);
@@ -144,11 +147,43 @@ public class Room {
         Clothing monsterLoot11 = new Clothing("Dragon God's Armour", 18, 70, 60);
         Clothing monsterLoot12 = new Clothing("Black Steel Armour", 25, 100, 100);
 
+        itemLottery.add(monsterLoot1);
+        itemLottery.add(monsterLoot2);
+        itemLottery.add(monsterLoot3);
+        itemLottery.add(monsterLoot4);
+        itemLottery.add(monsterLoot5);
+        itemLottery.add(monsterLoot6);
+        itemLottery.add(monsterLoot7);
+        itemLottery.add(monsterLoot8);
+        itemLottery.add(monsterLoot9);
+        itemLottery.add(monsterLoot10);
+        itemLottery.add(monsterLoot11);
+        itemLottery.add(monsterLoot12);
 
         Sword monsterWeapon = new Sword("Glory Monster Sword", 5, 10, 5, 20);
         Clothing monsterClothing = new Clothing("Shiny Monster Armour", 10, 20, 5);
 
+        int minBound, maxBound, willDrop, minIndex, maxIndex, lottery = 0, lottery2 = 0, willDrop2;
         for (int i = 0; i < monster_num; i++) {
+            minBound = 0;
+            maxBound = 1;
+            willDrop = (int) Math.floor(Math.random()*(maxBound-minBound+1)+minBound);
+            willDrop2 = (int) Math.floor(Math.random()*(maxBound-minBound+1)+minBound);
+
+            if (willDrop == 1) {
+                minIndex = 1;
+                maxIndex = 11;
+
+                lottery = (int) Math.floor(Math.random()*(maxIndex-minIndex+1)+minIndex);
+                lottery2 = (int) Math.floor(Math.random()*(maxIndex-minIndex+1)+minIndex);
+
+                if (lottery != 0) {
+                    monsterInventory.add(itemLottery.get(lottery));
+                }
+            }
+
+            System.out.println("LOTTERY NUYMBER ISSSSS:   " + lottery + "  " + lottery2);
+
             this.monsters.add(
                     new Monster(i, "Monster " + (i + 1),
                             this.level * 20,
@@ -159,6 +194,15 @@ public class Room {
             );
         }
 
+    }
+
+    public void displayLootableItems() {
+
+        int index = 0;
+        for (Item curItem : this.getItemLoot()) {
+            curItem.printItemInfo(index);
+            index++;
+        }
     }
 
     public void printer() {

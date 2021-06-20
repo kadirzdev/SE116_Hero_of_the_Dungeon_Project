@@ -86,6 +86,7 @@ public class Main {
                 currentRoom = game1.getCurrentRoom(roomID);
                 currentRoom.printRoomInfo();
                 System.out.println("List Inventory (in)");
+                System.out.println("Loot Items (lt)");
 
                 System.out.printf("Your ACTION: ");
 
@@ -121,6 +122,12 @@ public class Main {
                         } else if(resultOfFight == 1) {
                             attackedMonster.setName("Monster " + (attackedMonster.getID() + 1) + " (DEAD)");
 
+                            ArrayList<Item> allLootCollection = new ArrayList<Item>();
+                            allLootCollection.addAll(currentRoom.getItemLoot());
+                            allLootCollection.addAll(attackedMonster.getInventory());
+
+                            currentRoom.setItemLoot(allLootCollection);
+
                             // Update the hero's rescued townspeople stat
 
                         } else {
@@ -150,6 +157,10 @@ public class Main {
                         System.out.println("That slot in your inventory is EMPTY!");
                         continue;
                     }
+
+                }  else if (inputMove.equals("lt")) {
+
+                    currentRoom.displayLootableItems();
 
                 } else {
                     System.out.println("Please check your ACTION!");
