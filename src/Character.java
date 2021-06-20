@@ -266,6 +266,7 @@ class Monster extends Character {
     private int loot;
     private int currentHitPoints;
     private boolean isDead;
+    private Shields shield;
 
     public boolean isDead() {
         return isDead;
@@ -291,12 +292,13 @@ class Monster extends Character {
         this.currentHitPoints = currentHitPoints;
     }
 
-    public Monster(int ID, String name, int hitPoints, Weapons weapon, Armors clothing, int currentSet, int currentRoom, int loot, int currentHitPoints, int currentLevel) {
+    public Monster(int ID, String name, int hitPoints, Weapons weapon, Armors clothing, int currentSet, int currentRoom, int loot, int currentHitPoints, int currentLevel, Shields shield) {
 
         super(ID, name, hitPoints, weapon, clothing, currentSet, currentRoom, currentLevel);
 
         this.currentHitPoints = currentHitPoints;
         this.loot = loot;
+        this.shield = shield;
 
     }
 
@@ -307,7 +309,7 @@ class Monster extends Character {
         ArrayList<OneHanded> oneHandedArrayList = OneHanded.generateOneHandedSwords();
         ArrayList<Armors> armorsArrayList = Armors.generateArmors();
 
-        monsterArrayList.add(new Monster(1, "Goblin", 10, oneHandedArrayList.get(0), armorsArrayList.get(0), 0, 0, 5,10,1));
+        monsterArrayList.add(new Monster(1, "Goblin", 10, oneHandedArrayList.get(0), armorsArrayList.get(0), 0, 0, 5,10,1,null));
 
         return monsterArrayList;
     }
