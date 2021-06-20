@@ -163,6 +163,10 @@ public class Room {
         Sword monsterWeapon = new Sword("Glory Monster Sword", 5, 10, 5, 20);
         Clothing monsterClothing = new Clothing("Shiny Monster Armour", 10, 20, 5);
 
+        Punch punch = new Punch("Punch", 0, 1, 1, 5);
+        Clothing basic_tshirt = new Clothing("Basic T-shirt", 0, 0, 0);
+        ArrayList<Item> empty_inventory = new ArrayList<Item>();
+
         int minBound, maxBound, willDrop, minIndex, maxIndex, lottery = 0, lottery2 = 0, willDrop2;
         for (int i = 0; i < monster_num; i++) {
             minBound = 0;
@@ -182,7 +186,7 @@ public class Room {
                 }
             }
 
-            System.out.println("LOTTERY NUYMBER ISSSSS:   " + lottery + "  " + lottery2);
+            //System.out.println("LOTTERY NUYMBER ISSSSS:   " + lottery + "  " + lottery2);
 
             this.monsters.add(
                     new Monster(i, "Monster " + (i + 1),
@@ -193,6 +197,18 @@ public class Room {
                             monsterInventory)
             );
         }
+
+        for (int i = 0; i < townsperson_num; i++) {
+            this.townspeople.add(
+                    new Townsperson(i, "Townsperson " + (i + 1),
+                            1,
+                            punch,
+                            basic_tshirt,
+                            true, this.ID, this.level,
+                            empty_inventory)
+            );
+        }
+
 
     }
 

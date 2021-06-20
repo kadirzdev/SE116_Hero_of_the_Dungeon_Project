@@ -81,6 +81,7 @@ public class Main {
 
             do {
                 System.out.printf("------ Level %d - Room %02d ------\nPlayer: %s, Hero %s, %dHP, %s, %s%n", newHero.getCurrentLevel(), newHero.getCurrentRoom(), heroName, heroes[heroIndex-1], newHero.getHitPoints(), newHero.getWeapon().getName(), newHero.getClothing().getName());
+                System.out.println("Total Rescued Townspeople Count: " + newHero.getNumOfPeopleSaved());
 
                 roomID = newHero.getCurrentRoom();
                 currentRoom = game1.getCurrentRoom(roomID);
@@ -129,7 +130,7 @@ public class Main {
                             currentRoom.setItemLoot(allLootCollection);
 
                             // Update the hero's rescued townspeople stat
-
+                            newHero.setNumOfPeopleSaved(newHero.getNumOfPeopleSaved() + 1);
                         } else {
                             System.out.println("Nothing happened!");
                         }
@@ -161,6 +162,13 @@ public class Main {
                 }  else if (inputMove.equals("lt")) {
 
                     currentRoom.displayLootableItems();
+
+                } else if (inputMove.equals("pa")) {
+
+                    currentRoom.displayLootableItems();
+
+                    newHero.getInventory().addAll(currentRoom.getItemLoot());
+                    currentRoom.getItemLoot().clear();
 
                 } else {
                     System.out.println("Please check your ACTION!");

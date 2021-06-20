@@ -32,6 +32,10 @@ public class Character {
         return inventory;
     }
 
+    public void setInventory(ArrayList<Item> inventory) {
+        this.inventory = inventory;
+    }
+
     public int getID() {
         return ID;
     }
