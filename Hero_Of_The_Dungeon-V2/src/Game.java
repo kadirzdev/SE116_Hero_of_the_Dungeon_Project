@@ -34,7 +34,7 @@ public class Game {
         for (int i = 1; i <= this.totalLevels; i++) {
             for (int j = 1; j <= this.roomsInEachLevel; j++) {
                 int roomID = i * this.totalLevels + i + j - 4;
-                this.game[i - 1][j - 1] = new Room(roomID, i, monsters, townspeople, null, null, null);
+                this.game[i - 1][j - 1] = new Room(roomID, i, monsters, townspeople, null, null, null, null);
             }
         }
 
@@ -63,8 +63,9 @@ public class Game {
 
         }
 
-
     }
+
+
 
     public void generateLevelSystem() {
         Random rand = new Random();
@@ -79,6 +80,10 @@ public class Game {
         // Do the connection between the levels
         level1_room.setStairs(level1to2_room);
         level2to3_room.setStairs(level3_room);
+
+        // Do the connection for lower levels
+        level1to2_room.setDownstairs(level1_room);
+        level3_room.setDownstairs(level1to2_room);
     }
 
     public Room getCurrentRoom(int roomID) {

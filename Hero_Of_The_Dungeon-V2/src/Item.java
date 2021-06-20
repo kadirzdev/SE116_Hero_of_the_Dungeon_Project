@@ -54,6 +54,9 @@ abstract class Weapon extends Item {
         this.range = range;
     }
 
+    public int getDamage() {
+        return damage;
+    }
 }
 
 class Punch extends Weapon {

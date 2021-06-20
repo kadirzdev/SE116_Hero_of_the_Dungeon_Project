@@ -15,10 +15,11 @@ public class Room {
     private Room door1 = null;
     private Room door2 = null;
     private Room stairs = null;
+    private Room downstairs = null;
 
     private ArrayList<Item> itemLoot = new ArrayList<Item>();
 
-    public Room(int ID, int level, ArrayList<Monster> monsters, ArrayList<Townsperson> townspeople, Room door1, Room door2, Room stairs) {
+    public Room(int ID, int level, ArrayList<Monster> monsters, ArrayList<Townsperson> townspeople, Room door1, Room door2, Room stairs, Room downstairs) {
         this.ID = ID;
         this.level = level;
         this.monsters = monsters;
@@ -26,6 +27,7 @@ public class Room {
         this.door1 = door1;
         this.door2 = door2;
         this.stairs = stairs;
+        this.downstairs = downstairs;
         this.monsters = new ArrayList<Monster>();
         this.townspeople = new ArrayList<Townsperson>();
     }
@@ -102,6 +104,14 @@ public class Room {
         this.stairs = stairs;
     }
 
+    public Room getDownstairs() {
+        return downstairs;
+    }
+
+    public void setDownstairs(Room downstairs) {
+        this.downstairs = downstairs;
+    }
+
     public ArrayList<Item> getItemLoot() {
         return itemLoot;
     }
@@ -112,12 +122,11 @@ public class Room {
 
     public void createMobs() {
 
-
         int min = 1;
-        int max = this.level * 4;
+        int max = 3;
 
         int monster_num = (int)Math.floor(Math.random()*(max-min+1)+min);
-        int townsperson_num = monster_num / 3;
+        int townsperson_num = 1;
 
         // Moster Items
         ArrayList<Item> monsterInventory = new ArrayList<Item>();
@@ -126,7 +135,7 @@ public class Room {
 
         for (int i = 0; i < monster_num; i++) {
             this.monsters.add(
-                    new Monster(i, "Monster_" + i,
+                    new Monster(i, "Monster " + (i + 1),
                             this.level * 20,
                             monsterWeapon,
                             monsterClothing,
@@ -166,20 +175,30 @@ public class Room {
 
     public void printRoomInfo() {
         if (this.door1 != null) {
-            System.out.printf("door1 (d1)%n");
+            System.out.printf("Door 1 (d1)%n");
         }
 
         if (this.door2 != null) {
-            System.out.printf("door2 (d2)%n");
+            System.out.printf("Door 2 (d2)%n");
         }
 
         if (this.stairs != null) {
-            System.out.printf("stairs (up)");
+            System.out.printf("Stairs (up)%n");
+        }
+
+        if (this.downstairs != null) {
+            System.out.printf("Downstairs (down)%n");
         }
 
         if (!this.monsters.isEmpty()) {
             for (int i = 0; i < this.monsters.size(); i++) {
-                System.out.printf("attack monster%d (a%d)%n", i + 1, i + 1);
+
+                if (this.monsters.get(i).isLifeStatus()) {
+                    System.out.printf("Attack " + this.monsters.get(i).getName() + " --> (a%d)%n", i + 1);
+                } else {
+                    System.out.printf("Attack " + this.monsters.get(i).getName() + " %n", i + 1);
+                }
+
             }
         }
 

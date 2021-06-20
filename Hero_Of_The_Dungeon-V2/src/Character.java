@@ -73,6 +73,7 @@ public class Character {
         this.lifeStatus = lifeStatus;
     }
 
+
     public int getCurrentRoom() {
         return currentRoom;
     }
@@ -140,12 +141,75 @@ class Hero extends Character {
         }
         return false;
     }
+
+    public void moveHero(int x){
+        this.setCurrentRoom(x);
+
+    }
+
+    public int fight(Monster attackedMonster) {
+        // Get HP & damage of the Hero
+        int heroHP = this.getHitPoints();
+        int heroDMG = this.getWeapon().getDamage();
+
+        // Get HP & damage of the Monster
+        int monsterHP = attackedMonster.getHitPoints();
+        int monsterDMG = attackedMonster.getWeapon().getDamage();
+
+        // Do the fight
+        monsterHP -= heroDMG;
+        attackedMonster.setHitPoints(monsterHP);
+
+        if (monsterHP <= 0) {
+            System.out.println("HERO YOU KILLED ME!!!");
+            attackedMonster.setLifeStatus(false);
+            return 1;
+        }
+
+        heroHP -= monsterDMG;
+        this.setHitPoints(heroHP);
+
+        if(heroHP <= 0) {
+            System.out.println("GAME OVER!");
+            this.setLifeStatus(false);
+            return -1;
+        }
+
+        return 0;
+
+    }
+
+
 }
 
 class Aragorn extends Hero {
     private final String characterName = "Aragorn";
 
     public Aragorn(int ID, String name, int hitPoints, Weapon weapon, Clothing clothing, boolean lifeStatus, int currentRoom, int currentLevel, ArrayList<Item> inventory) {
+        super(ID, name, hitPoints, weapon, clothing, lifeStatus, currentRoom, currentLevel, inventory);
+    }
+
+    public String getCharacterName() {
+        return characterName;
+    }
+}
+
+class Warrior extends Hero {
+    private final String characterName = "Warrior";
+
+    public Warrior(int ID, String name, int hitPoints, Weapon weapon, Clothing clothing, boolean lifeStatus, int currentRoom, int currentLevel, ArrayList<Item> inventory) {
+        super(ID, name, hitPoints, weapon, clothing, lifeStatus, currentRoom, currentLevel, inventory);
+    }
+
+    public String getCharacterName() {
+        return characterName;
+    }
+}
+
+class HokiDoki extends Hero {
+    private final String characterName = "HokiDoki";
+
+    public HokiDoki(int ID, String name, int hitPoints, Weapon weapon, Clothing clothing, boolean lifeStatus, int currentRoom, int currentLevel, ArrayList<Item> inventory) {
         super(ID, name, hitPoints, weapon, clothing, lifeStatus, currentRoom, currentLevel, inventory);
     }
 
