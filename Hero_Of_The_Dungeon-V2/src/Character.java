@@ -11,7 +11,7 @@ public class Character {
     private int      currentRoom;
     private int      currentLevel;
 
-    private ArrayList<Item> inventory = new ArrayList<Item>();
+    private ArrayList<Item> inventory;
 
     public Character(int ID, String name, int hitPoints, Weapon weapon, Clothing clothing, boolean lifeStatus, int currentRoom, int currentLevel, ArrayList<Item> inventory) {
         this.ID = ID;
@@ -22,7 +22,14 @@ public class Character {
         this.lifeStatus = lifeStatus;
         this.currentRoom = currentRoom;
         this.currentLevel = currentLevel;
+        this.inventory = new ArrayList<Item>();
         this.inventory = inventory;
+
+        this.hitPoints += this.clothing.getBonusHP();
+    }
+
+    public ArrayList<Item> getInventory() {
+        return inventory;
     }
 
     public int getID() {
@@ -90,6 +97,29 @@ public class Character {
         this.currentLevel = currentLevel;
     }
 
+    public void equip(Item willEquip, int willEquippedIndex) {
+        if (willEquip instanceof Weapon) {
+
+            Weapon tempWeapon;
+            tempWeapon = this.weapon;
+            this.setWeapon((Weapon) willEquip);
+            this.inventory.remove(willEquippedIndex);
+            this.inventory.add(willEquippedIndex, tempWeapon);
+
+        } else if (willEquip instanceof Clothing) {
+
+            Clothing tempClothing;
+            tempClothing = this.clothing;
+
+            this.setClothing((Clothing) willEquip);
+
+            this.inventory.remove(willEquippedIndex);
+            this.inventory.add(willEquippedIndex, tempClothing);
+
+            this.setClothing((Clothing) willEquip);
+            this.setHitPoints(this.getHitPoints() + ((Clothing) willEquip).getBonusHP() - tempClothing.getBonusHP());
+        }
+    }
 }
 
 class Monster extends Character {
@@ -170,7 +200,7 @@ class Hero extends Character {
         this.setHitPoints(heroHP);
 
         if(heroHP <= 0) {
-            System.out.println("GAME OVER!");
+            System.out.println("YOU DIED!!! ---- GAME OVER! :(");
             this.setLifeStatus(false);
             return -1;
         }
@@ -179,6 +209,13 @@ class Hero extends Character {
 
     }
 
+    public void listInventory() {
+        int index = 0;
+        for (Item curItem : this.getInventory()) {
+            curItem.printItemInfo(index);
+            index++;
+        }
+    }
 
 }
 

@@ -33,13 +33,29 @@ abstract public class Item {
     public void setValue(int value) {
         this.value = value;
     }
+
+    public void printItemInfo(int index) {
+        System.out.printf("(i%d): Item Name: %s, Item Value: %d%n", index + 1, this.getName(), this.getValue());
+    }
 }
 
 class Clothing extends Item {
 
-    public Clothing(String name, int weight, int value) {
+    private int bonusHP;
+
+    public Clothing(String name, int weight, int value, int bonusHP) {
         super(name, weight, value);
+        this.bonusHP = bonusHP;
     }
+
+    public int getBonusHP() {
+        return bonusHP;
+    }
+
+    public void printItemInfo(int index) {
+        System.out.printf("(i%d): Clothing Name: %s, Bonus HP: %d%n", index + 1, this.getName(), this.getBonusHP());
+    }
+
 }
 
 
@@ -57,6 +73,11 @@ abstract class Weapon extends Item {
     public int getDamage() {
         return damage;
     }
+
+    public void printItemInfo(int index) {
+        System.out.printf("(i%d): Weapon Name: %s, Weapon Damage: %d, Weapon Range: %d%n", index + 1, this.getName(), this.getDamage(), this.range);
+    }
+
 }
 
 class Punch extends Weapon {

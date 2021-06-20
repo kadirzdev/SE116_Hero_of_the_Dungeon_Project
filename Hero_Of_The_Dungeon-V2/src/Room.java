@@ -128,10 +128,25 @@ public class Room {
         int monster_num = (int)Math.floor(Math.random()*(max-min+1)+min);
         int townsperson_num = 1;
 
-        // Moster Items
+        // Monster Items
         ArrayList<Item> monsterInventory = new ArrayList<Item>();
-        Sword monsterWeapon = new Sword("Glory Monster Sword", 5, 10, 10, 20);
-        Clothing monsterClothing = new Clothing("Shiny Monster Armour", 10, 20);
+
+        Sword monsterLoot1 = new Sword("Glory Sword", 5, 10, 10, 10);
+        Sword monsterLoot2 = new Sword("Big Sword", 7, 15, 15, 10);
+        Sword monsterLoot3 = new Sword("Sun Sword", 10, 20, 20, 10);
+        Axe monsterLoot4 = new Axe("Big Axe", 13, 10, 17, 7);
+        Axe monsterLoot5 = new Axe("Thor Axe", 15, 15, 23, 7);
+        Bow monsterLoot6 = new Bow("Bowi Mowi Bow", 7, 20, 25, 100);
+        Bow monsterLoot7 = new Bow("S400 Bow", 7, 20, 30, 150);
+        Clothing monsterLoot8 = new Clothing("Death's Plate Armour", 5, 20, 20);
+        Clothing monsterLoot9 = new Clothing("Lion's Plate Armour", 8, 40, 30);
+        Clothing monsterLoot10 = new Clothing("Dragon's Plate Armour", 12, 50, 40);
+        Clothing monsterLoot11 = new Clothing("Dragon God's Armour", 18, 70, 60);
+        Clothing monsterLoot12 = new Clothing("Black Steel Armour", 25, 100, 100);
+
+
+        Sword monsterWeapon = new Sword("Glory Monster Sword", 5, 10, 5, 20);
+        Clothing monsterClothing = new Clothing("Shiny Monster Armour", 10, 20, 5);
 
         for (int i = 0; i < monster_num; i++) {
             this.monsters.add(
@@ -202,7 +217,6 @@ public class Room {
             }
         }
 
-        System.out.println(this.monsters.size());
     }
 
 }
