@@ -136,9 +136,6 @@ class Hero extends Character {
     int savedTownspeople;
     int previousRoom;
     int previousSet;
-    ArrayList<Weapons> weaponsArrayList;
-    ArrayList<Armors> armorsArrayList;
-    int carryweight;
 
     public Hero(int ID, String name, int hitPoints, Weapons weapon, Armors clothing, int currentSet, int currentRoom, int currentLevel) {
 
@@ -207,37 +204,42 @@ class Hero extends Character {
         }
     }
 
-    public void generateInventory(){
-        weaponsArrayList.add(getWeapon());
-        carryweight++;
-        armorsArrayList.add(getClothing());
-        carryweight++;
-    }
-    public void inventory() {
+
+
+    public void inventory(ArrayList<Weapons> weaponsInventory, ArrayList<Armors> armorsInventory) {
 
 
         System.out.println("Firstly, type the item list name. Then, write its list number.");
         System.out.println("Example:");
-        System.out.println("Weapons");
+        System.out.println("weapon");
         System.out.println("1");
         System.out.println();
         System.out.println("Weapons: ");
-            for (Weapons i : weaponsArrayList){
-                int j = 0;
-                System.out.println((j+1) + ") " + i.name);
+            for (int i = 0; i < weaponsInventory.size(); i++){
+                if (weaponsInventory == null){
+                    System.out.println("Nothing.");
+                }else {
+                    int j = 0;
+                    System.out.println((j + 1) + ") " + weaponsInventory.get(i).name);
+                }
             }
         System.out.println("Armors:");
-            for (Armors i : armorsArrayList){
-                int j = 0;
-                System.out.println((j+1) + ") " + i.name);
+            for (Armors i : armorsInventory) {
+                if (armorsInventory == null) {
+                    System.out.println("Nothing.");
+                } else {
+                    int j = 0;
+                    System.out.println((j + 1) + ") " + i.name);
+                    j++;
+                }
             }
 
         }
 
-    public void weaponschoices() {
+    public void weaponschoices(){
         System.out.println("choose a number.");
         System.out.println("1) Equip / Unequip");
-        System.out.println("2) Drop");
+        System.out.println("2) Description");
     }
 
     public void lootMenu(Rooms[][] rooms) {

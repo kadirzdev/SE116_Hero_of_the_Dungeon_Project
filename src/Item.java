@@ -33,6 +33,12 @@ import java.util.ArrayList;
             this.name = name;
             this.additionalHealth = additionalHealth;
         }
+
+        @Override
+        public String toString() {
+            return "name: " + name
+                    + " additional health: " + additionalHealth;
+        }
     }
 
 
@@ -83,6 +89,12 @@ import java.util.ArrayList;
             return oneHandedArrayList;
         }
 
+        @Override
+        public String toString() {
+            return "name: " + name
+                    + " range: " + range
+                    + " max damage: " + damage;
+        }
     }
 
 
@@ -107,6 +119,13 @@ import java.util.ArrayList;
             bowsArrayList.add(new Bows("Heavy Crossbow", 80, 20));
              return bowsArrayList;
         }
+
+        @Override
+        public String toString() {
+            return "name: " + name
+                    + " range: " + range
+                    + " max damage: " + damage;
+        }
     }
 
     class Shields implements Items {
@@ -119,6 +138,13 @@ import java.util.ArrayList;
             this.name = name;
             this.additionalHealth = additionalHealth;
             this.blockChance = blockChance;
+        }
+
+        @Override
+        public String toString() {
+            return "name: " + name
+                    + " block chance " + blockChance
+                    + " additional health: " + additionalHealth;
         }
 
         public static ArrayList<Shields> generateShields() {
@@ -135,6 +161,8 @@ import java.util.ArrayList;
             shieldsArrayList.add(new Shields("Hellknight Shield", 100, 50));
 
             return shieldsArrayList;
+
+
         }
 
         public int getBlockChance(){
