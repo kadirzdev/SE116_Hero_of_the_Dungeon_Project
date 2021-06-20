@@ -39,6 +39,13 @@ import java.util.ArrayList;
             return "name: " + name
                     + " additional health: " + additionalHealth;
         }
+
+        public String getName(){
+            return this.name;
+        }
+
+
+
     }
 
 
@@ -51,6 +58,10 @@ import java.util.ArrayList;
             this.name = name;
             this.range = range;
             this.damage = damage;
+        }
+
+        public String getName() {
+            return this.name;
         }
 
 

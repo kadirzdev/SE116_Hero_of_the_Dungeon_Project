@@ -145,11 +145,17 @@ class Hero extends Character {
     int savedTownspeople;
     int previousRoom;
     int previousSet;
+    String heroType;
 
-    public Hero(int ID, String name, int hitPoints, Weapons weapon, Armors clothing, int currentSet, int currentRoom, int currentLevel) {
+    public Hero(int ID, String name, int hitPoints, Weapons weapon, Armors clothing, int currentSet, int currentRoom, int currentLevel, String heroType) {
 
         super(ID, name, hitPoints, weapon, clothing, currentSet, currentRoom, currentLevel);
+        this.heroType = heroType;
 
+    }
+
+    public String getHeroType() {
+        return this.heroType;
     }
 
     public void attack(Monster monster, Hero hero, Rooms[][] rooms) {

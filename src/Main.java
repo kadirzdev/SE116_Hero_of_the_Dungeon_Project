@@ -7,6 +7,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
+        String[] heroTypes = {"Warrior", "Aragorn"};
+
         ArrayList<OneHanded> oneHandedArrayList = OneHanded.generateOneHandedSwords();
         ArrayList<Shields> shieldsArrayLists = Shields.generateShields();
         ArrayList<Bows> bowsArrayList = Bows.generateBows();
@@ -35,10 +37,24 @@ public class Main {
         ArrayList<Weapons> weaponsInventory = new ArrayList<>();
         ArrayList<HealingPotion> potionInventory = new ArrayList<>();
 
-        Hero hero = new Hero(1, "Testing Buddy", 100, oneHandedArrayList.get(0), armorsArrayList.get(0), 0, 0, 1);
+        System.out.println("----- CREATE YOUR HERO -----");
+        for (int i = 0; i < heroTypes.length; i++) {
+            System.out.printf("%d - %s%n", i+1, heroTypes[i]);
+        }
+        System.out.printf("Pick your hero type: ");
+        int heroType = input.nextInt();
+
+        System.out.printf("Type your hero name: ");
+        String heroName = input.next();
+
+
+
+
+
+        Hero hero = new Hero(1, heroName, 100, oneHandedArrayList.get(0), armorsArrayList.get(0), 0, 0, 1, heroTypes[heroType-1]);
         armorsInventory.add(hero.getClothing());
         weaponsInventory.add(hero.getWeapon());
-        System.out.println("The " + hero.getName() + " is now in " + (hero.getCurrentRoom() + 1) + ". room");
+        System.out.println("Hero " + hero.getHeroType() + ", " + hero.getHitPoints() + "HP " + hero.getWeapon().getName() + ", " + hero.getClothing().getName());
         rooms[hero.getCurrentSet()][hero.getCurrentRoom()].perceive(hero);
 
         boolean looper = true;
