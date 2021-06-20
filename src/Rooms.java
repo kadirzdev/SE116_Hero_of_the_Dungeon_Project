@@ -74,9 +74,6 @@ public class Rooms {
             System.out.println("Enter the door (enterdoor1)");
             System.out.println("Second door (enterdoor2)");
         }
-        if (weaponsloot != null){
-            System.out.println("Take the items in the ground (take)");
-        }
         System.out.println("Attack monster (attackmonster1)");
         System.out.println("Check life status (hp)");
         System.out.println("Check monster's life status (monsterhp)");
@@ -88,6 +85,7 @@ public class Rooms {
         }
         System.out.println("Go back (goback)");
         System.out.println("Open your inventory (inventory)");
+        System.out.println("Drink a healing potion (heal)");
     }
 
 

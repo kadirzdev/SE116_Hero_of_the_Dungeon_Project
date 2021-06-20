@@ -33,6 +33,7 @@ public class Main {
 
         ArrayList<Armors> armorsInventory = new ArrayList<>();
         ArrayList<Weapons> weaponsInventory = new ArrayList<>();
+        ArrayList<HealingPotion> potionInventory = new ArrayList<>();
 
         Hero hero = new Hero(1, "Testing Buddy", 100, oneHandedArrayList.get(0), armorsArrayList.get(0), 0, 0, 1);
         armorsInventory.add(hero.getClothing());
@@ -52,6 +53,7 @@ public class Main {
                         rooms[hero.getCurrentSet()][hero.getCurrentRoom()].perceive(hero);
                     } else if (rooms[hero.getCurrentSet()][hero.getCurrentRoom()].monster == null) {
                         System.out.println("There's no monster in this room.");
+                        rooms[hero.getCurrentSet()][hero.getCurrentRoom()].perceive(hero);
                         rooms[hero.getCurrentSet()][hero.getCurrentRoom()].perceive(hero);
                     } else {
                         hero.attack(rooms[hero.getCurrentSet()][hero.getCurrentRoom()].monster, hero, rooms);
@@ -112,11 +114,12 @@ public class Main {
                     break;
 
                 case "take":
-                    boolean overencumber = true;
                     for (int i = 0; i < rooms[hero.getCurrentSet()][hero.getCurrentRoom()].weaponsloot.size(); i++) {
+                        System.out.println(rooms[hero.getCurrentSet()][hero.getCurrentRoom()].weaponsloot.get(i).name + "is now in your inventory.");
                         weaponsInventory.add(rooms[hero.getCurrentSet()][hero.getCurrentRoom()].weaponsloot.get(i));
                         rooms[hero.getCurrentSet()][hero.getCurrentRoom()].weaponsloot.remove(i);
                     }
+                    break;
                 case "inventory":
                     hero.inventory(weaponsInventory, armorsInventory);
                     boolean innerlooper = true;
@@ -153,6 +156,7 @@ public class Main {
 
                                     case 2:
                                         System.out.println(hero.getWeapon());
+                                        rooms[hero.getCurrentSet()][hero.getCurrentRoom()].perceive(hero);
                                 }
                                 break;
                             case "armor":
@@ -180,34 +184,50 @@ public class Main {
                                         }
                                         break;
                                 }
+                                break;
                         }
-                        break;
-
 
                     }
+                    break;
                 case "loot":
-                    System.out.println("In the remains, you found" + rooms[hero.getCurrentSet()][hero.getCurrentRoom()].monster.getWeapon().name + ", and" + rooms[hero.getCurrentSet()][hero.getCurrentRoom()].monster.getClothing().name + ".");
+                    System.out.println("In the remains, you found " + rooms[hero.getCurrentSet()][hero.getCurrentRoom()].monster.getWeapon().name + ", and " + rooms[hero.getCurrentSet()][hero.getCurrentRoom()].monster.getClothing().name + ".");
                     int whattypeofloot = (int) (Math.random() * 3);
+                    System.out.println("You also found a healing potion.");
 
                     hero.lootMenu(rooms);
                     String lootchosin = input.next();
                     switch (lootchosin) {
-                        case "loot1":
+                        case "take1":
                             System.out.println(rooms[hero.getCurrentSet()][hero.getCurrentRoom()].monster.getWeapon().name + " is now in your inventory.");
                             weaponsInventory.add(rooms[hero.getCurrentSet()][hero.getCurrentRoom()].monster.getWeapon());
+                            rooms[hero.getCurrentSet()][hero.getCurrentRoom()].perceive(hero);
 
 
                             break;
-                        case "loot2":
+                        case "take2":
 
                             System.out.println(rooms[hero.getCurrentSet()][hero.getCurrentRoom()].monster.getClothing().name + " is now in your inventory.");
                             armorsInventory.add(rooms[hero.getCurrentSet()][hero.getCurrentRoom()].monster.getClothing());
+                            rooms[hero.getCurrentSet()][hero.getCurrentRoom()].perceive(hero);
+                            break;
 
-                            System.out.println("You don't have space in your inventory. You need to drop some items.");
+                        case "take3":
+                            System.out.println("Healing potion is now in your inventory.");
+                            hero.setBottlesofhealingpotions(hero.getBottlesofhealingpotions() + 1);
+                            rooms[hero.getCurrentSet()][hero.getCurrentRoom()].perceive(hero);
                             break;
 
                     }
 
+                case "heal":
+                    if (hero.getBottlesofhealingpotions() == 0){
+                        System.out.println("You don't have any healing potions.");
+                        rooms[hero.getCurrentSet()][hero.getCurrentRoom()].perceive(hero);
+                    }else {
+                        HealingPotion.heal(hero);
+                        rooms[hero.getCurrentSet()][hero.getCurrentRoom()].perceive(hero);
+
+                    }
             }
 
 

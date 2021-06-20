@@ -171,3 +171,21 @@ import java.util.ArrayList;
 
     }
 
+    class HealingPotion{
+        static final int maxHealingAmount = 25;
+        static int amount;
+
+        static void heal(Hero hero){
+            for (int i = 0; i < maxHealingAmount; i++){
+                if (hero.getHitPoints() == 100){
+                    System.out.println("Your HP is already full.");
+                    i = 101;
+                }else{
+                    hero.setHitPoints(hero.getHitPoints()+1);
+                    System.out.println("You drank the healing potion. You HP is now : " + hero.getHitPoints());
+                }
+            }
+        }
+
+    }
+

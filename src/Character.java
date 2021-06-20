@@ -23,6 +23,15 @@ public class Character {
     private int     currentRoom;
     private int     currentLevel;
     private Shields   shield;
+    private int bottlesofhealingpotions;
+
+    public int getBottlesofhealingpotions() {
+        return bottlesofhealingpotions;
+    }
+
+    public void setBottlesofhealingpotions(int bottlesofhealingpotions) {
+        this.bottlesofhealingpotions = bottlesofhealingpotions;
+    }
 
     public Shields getShield() {
         return shield;
@@ -215,22 +224,25 @@ class Hero extends Character {
         System.out.println("1");
         System.out.println();
         System.out.println("Weapons: ");
+        int j = 0;
             for (int i = 0; i < weaponsInventory.size(); i++){
                 if (weaponsInventory == null){
                     System.out.println("Nothing.");
                 }else {
-                    int j = 0;
+
                     System.out.println((j + 1) + ") " + weaponsInventory.get(i).name);
+                    j++;
                 }
             }
         System.out.println("Armors:");
+        int k = 0;
             for (Armors i : armorsInventory) {
                 if (armorsInventory == null) {
                     System.out.println("Nothing.");
                 } else {
-                    int j = 0;
-                    System.out.println((j + 1) + ") " + i.name);
-                    j++;
+
+                    System.out.println((k + 1) + ") " + i.name);
+                    k++;
                 }
             }
 
@@ -245,7 +257,7 @@ class Hero extends Character {
     public void lootMenu(Rooms[][] rooms) {
         System.out.println("Take " + rooms[getCurrentSet()][getCurrentRoom()].monster.getWeapon().name + " (take1)");
         System.out.println("Take " + rooms[getCurrentSet()][getCurrentRoom()].monster.getClothing().name + " (take2)");
-        System.out.println("Take rewards (takerewards)");
+        System.out.println("Take the healing potion (take3)");
     }
 }
 
