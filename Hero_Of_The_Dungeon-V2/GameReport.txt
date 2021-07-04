@@ -1,6 +1,0 @@
-Thank you for playing the game. We created short summary of your actions: 
-Player Name: kadir
-Hero Name: HokiDoki
-Level: 1
-Total Rescued Townspeople: 0
-Game Creators: Suphi Kadir Ozarpaci - Direnc Can Karahan - Lutfi Sevim
